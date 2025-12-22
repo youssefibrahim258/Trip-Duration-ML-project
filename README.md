@@ -49,7 +49,7 @@ The project employs **MLflow** for tracking parameters, metrics, and plots. Key 
 
 Here is a screenshot demonstrating the use of MLflow for tracking experiments:
 
-![MLflow UI Screenshot](ss.png)
+![MLflow UI Screenshot](assets/mlflow_ui.png)
 
 ## Deployment
 The model is deployed using **FastAPI** and **Docker**, allowing for scalable and efficient serving of predictions. This setup facilitates easy integration into web applications, providing a robust API for users.
@@ -59,12 +59,12 @@ The model is deployed using **FastAPI** and **Docker**, allowing for scalable an
 ### Actual vs Predicted Plot
 The **Actual vs Predicted** plot visualizes the relationship between the true trip durations and the predicted values. 
 
-![Actual vs Predicted](path/to/your/mlflow/plots/train/train_actual_vs_pred.png)
+![Actual vs Predicted](assets/train_actual_vs_pred.png)
 
 ### Residuals Plot
 The **Residuals Plot** illustrates the residuals (the difference between actual and predicted values) against the predicted trip durations. 
 
-![Residuals Plot](path/to/your/mlflow/plots/train/residuals_train.png)
+![Residuals Plot](assets/residuals_train.png)
 
 
 
