@@ -1,3 +1,14 @@
+"""
+Training script for Trip Duration regression model.
+
+This script:
+- Loads and cleans train/validation data
+- Performs feature engineering and preprocessing
+- Builds a training pipeline
+- Trains and evaluates the model
+- Logs metrics, figures, and models using MLflow
+"""
+
 import os
 import sys
 import time
@@ -26,14 +37,11 @@ def main(args):
     df_train=load_data(args.train_path)
     df_val=load_data(args.val_path)
 
-    print("Done step1")
     # Step 2 : Clean the train data
     df_train=clean_data(df_train)
-    print("Done step2")
 
     # Step 3 : Build a new features
     df_train,df_val,kmeans_model=build_feature(df_train,df_val)
-    print("Done step3")
 
     # Step 4 : Preprocessing
     if args.scaler =="standardScaler":
@@ -42,7 +50,7 @@ def main(args):
         scaler=MinMaxScaler()
 
     column_transformer=build_preprocessor(scaler)
-    print("Done step4")
+    
 
     # Step 5 : Get the selected train features and the selected model
     feature_selected=get_feature()
@@ -55,22 +63,21 @@ def main(args):
         ("poly",PolynomialFeatures(args.poly_degree)),
         ("regression",selected_model(alpha=args.alpha))
     ])
-    print("Done step6")
+    
 
     # Step 7 : Train the model and evaluate + Mlflow
-    mlflow.set_tracking_uri("sqlite:///mlflow.db")   # Use SQLite DB instead of mlruns
+    mlflow.set_tracking_uri("sqlite:///mlflow.db")   
 
     mlflow.set_experiment(args.experiment)
     with mlflow.start_run(run_name="Trip_Duration") as run:
         mlflow.set_tag("model", "Ridge")
-        print("start_train")
+        
         model=train_pipeline(pipeline,df_train,feature_selected,target)
         mlflow.log_params({
             "alpha": args.alpha,
             "scaler": args.scaler,
             "poly_degree": args.poly_degree})
         
-        print("end_of_train")
 
         # Log the train Metrix and Figure
         x_train = df_train[feature_selected]
@@ -102,8 +109,8 @@ def main(args):
 
 if __name__ == "__main__":
     parser=argparse.ArgumentParser(description="Trip Duration Project + mlflow")
-    parser.add_argument('--train_path',type=str,default=r"Y:\01_ML\Projects\00_End_to_End\01_Trip_Duration\Data\train.csv",help='train_path')
-    parser.add_argument('--val_path',type=str,default=r"Y:\01_ML\Projects\00_End_to_End\01_Trip_Duration\Data\val.csv",help='val_path')
+    parser.add_argument('--train_path',type=str,default=r"Data_Sets\train.csv",help='train_path')
+    parser.add_argument('--val_path',type=str,default=r"Data_Sets\test.csv",help='val_path')
 
     parser.add_argument('--scaler',type=str,default="standardScaler",
                         choices=["standardScaler","MinMaxScaler"],

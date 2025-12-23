@@ -1,3 +1,13 @@
+"""
+Inference module for Trip Duration prediction.
+
+This module:
+- Loads trained KMeans and Ridge models
+- Applies the same feature engineering used during training
+- Ensures feature order consistency
+- Returns trip duration predictions for incoming requests
+"""
+
 import pandas as pd
 import mlflow
 import os

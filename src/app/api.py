@@ -1,3 +1,10 @@
+"""
+FastAPI application for Trip Duration prediction.
+
+This module exposes a REST endpoint that receives trip information
+and returns the predicted trip duration using a trained ML model.
+"""
+
 from fastapi import FastAPI
 from pydantic import BaseModel
 

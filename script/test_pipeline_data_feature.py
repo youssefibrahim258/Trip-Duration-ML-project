@@ -1,11 +1,16 @@
+"""
+Test script for data loading, preprocessing, and feature engineering pipeline.
+Used to validate train/validation data transformations.
+"""
+
 import pandas as pd 
 from src.data.load_data import load_data
 from src.data.preprocess import clean_data
 from src.features.feature_engineering import build_feature
 
 
-TRAIN_PATH=r"Y:\01_ML\Projects\00_End_to_End\01_Trip_Duration\Data\Split-Sample\train.csv"
-VAL_PATH=r"Y:\01_ML\Projects\00_End_to_End\01_Trip_Duration\Data\Split-Sample\val.csv"
+TRAIN_PATH=r"Data_Sets\train.csv"
+VAL_PATH=r"Data_Sets\test.csv"
 
 def main():
     # 1:Load Data
@@ -26,23 +31,6 @@ def main():
 
     print(df_train.columns)
 
-
 if __name__ == "__main__":
     main()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
