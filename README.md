@@ -236,7 +236,9 @@ POST /predict
   "trip_duration": 7.759280004574624
 }
 ```
-
+> **Note**: The predicted `trip_duration` is returned in log scale.  
+> To obtain the duration in seconds: `np.expm1(prediction)`
+> 
 ---
 
 ## Model Evaluation and Visualization
